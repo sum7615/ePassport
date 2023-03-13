@@ -1,45 +1,10 @@
-package com.passport.entity;
+package com.passport.dto;
 
 import java.time.LocalDate;
 
-
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-
-
-
-
-@Entity
-@Table(name="users", uniqueConstraints = @UniqueConstraint(name = "username_unique", columnNames = "username"))
-public class Users{
-
-	@Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
-    @Column(name = "id", updatable = false)
-    private Long id;
-	
-//	@NotBlank(message = "Name is not valid")
-//	@Pattern(regexp ="^[a-zA-Z][a-zA-Z\\s]{0,20}[a-zA-Z]$")
+public class ResgistrationResponseDto {
+	private long id;
 	private String name;
-	
-	@Column(unique=true, name="username")
-//	@NotBlank(message = "Username is not valid")
-//    @UniqueElements(message="Username is duplicate")
 	private String username;
 	private LocalDate dob;
 	private String gender;
@@ -48,10 +13,25 @@ public class Users{
 	private String permanentAddress;
 	private String password;
 	private String roles;
-	public Long getId() {
+	
+	public ResgistrationResponseDto(long id, String name, String username, LocalDate dob, String gender, String phone,
+			String presentAddress, String permanentAddress, String password, String roles) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.username = username;
+		this.dob = dob;
+		this.gender = gender;
+		this.phone = phone;
+		this.presentAddress = presentAddress;
+		this.permanentAddress = permanentAddress;
+		this.password = password;
+		this.roles = roles;
+	}
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -110,14 +90,13 @@ public class Users{
 	}
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", username=" + username + ", dob=" + dob + ", gender=" + gender
-				+ ", phone=" + phone + ", presentAddress=" + presentAddress + ", permanentAddress=" + permanentAddress
-				+ ", password=" + password + ", roles=" + roles + "]";
+		return "ResgistrationResponseDto [id=" + id + ", name=" + name + ", username=" + username + ", dob=" + dob
+				+ ", gender=" + gender + ", phone=" + phone + ", presentAddress=" + presentAddress
+				+ ", permanentAddress=" + permanentAddress + ", password=" + password + ", roles=" + roles + "]";
 	}
-	public Users(Long id, String name, String username, LocalDate dob, String gender, String phone,
+	public ResgistrationResponseDto(String name, String username, LocalDate dob, String gender, String phone,
 			String presentAddress, String permanentAddress, String password, String roles) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.dob = dob;
@@ -128,10 +107,9 @@ public class Users{
 		this.password = password;
 		this.roles = roles;
 	}
-	public Users() {
+	public ResgistrationResponseDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-
 }
