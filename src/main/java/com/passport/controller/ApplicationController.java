@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.passport.entity.Application;
 import com.passport.repository.ApplicationRepository;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ApplicationController {
 	@Autowired
@@ -21,18 +24,21 @@ public class ApplicationController {
 	public String application() {
 		return "application";
 	}
+
 	@GetMapping("/apply")
 	public String apply(Model m) {
 		List<Application> allApp = applicationRepository.findAll();
-		m.addAttribute("app",allApp);
+		m.addAttribute("app", allApp);
 		return "apply";
 	}
+
 	@PostMapping("/application")
-	public Application saveApplication(@ModelAttribute Application application) {
+	public String saveApplication(@ModelAttribute Application application) {
 		Application lastApp = applicationRepository.findByAadhar(application.getAadhar());
-		if(lastApp==null)	{
+		if (lastApp == null) {
 			applicationRepository.save(application);
-		}
-		return application;
+		
+		} 
+		return "redirect:/apply";
 	}
 }

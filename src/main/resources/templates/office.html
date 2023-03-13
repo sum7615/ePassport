@@ -141,7 +141,7 @@ table.table td .add {
 							</h2>
 						</div>
 						<div class="col-sm-4">
-							<a href="/application" class="btn btn-info add-new"> <i
+							<a href="/addPassportoffice" class="btn btn-info add-new"> <i
 								class="fa fa-plus"></i> Add New
 							</a>
 						</div>
@@ -152,18 +152,20 @@ table.table td .add {
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Father Name</th>
-							<th>Aadhar</th>
-							<th>Actions</th>
+							<th>Office Name</th>
+							<th>Jurisdiction Name</th>
+							<th>Phone Number</th>
+							<th>Address</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="pp : ${app}">
-							<td>[[${pp.name}]]</td>
-							<td>[[${pp.fathername}]]</td>
-							<td>[[${pp.aadhar}]]</td>
-							<td><a>Download</a>
+						<tr th:each="pp : ${office}">
+							<td>[[${pp.officeName}]]</td>
+							<td>[[${pp.jurisdictionName}]]</td>
+							<td>[[${pp.phoneNumber}]]</td>
+							<td><a>address</a>
+							<td></td>
 						</tr>
 					</tbody>
 				</table>
