@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +42,7 @@ public class PassportofficeController {
 	}
 
 	@PostMapping("/addPassportOffice")
-	public String add_passportoffice(@Valid @RequestBody PassportOffice passportOffice, Model m) {
+	public String add_passportoffice(@Valid @ModelAttribute("passportOffice") PassportOffice passportOffice, Model m) {
 		passportOfficeService.add_passportoffice(passportOffice);
 		List<PassportOffice> office = passportOfficeRepository.findAll();
 		m.addAttribute("office", office);
