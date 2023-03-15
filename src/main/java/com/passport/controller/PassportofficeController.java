@@ -1,6 +1,7 @@
 package com.passport.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +29,7 @@ public class PassportofficeController {
 
 	@Autowired
 	private PassportOfficeService passportOfficeService;
-
+	@Autowired
 	private PassportOfficeRepository passportOfficeRepository;
 
 	@GetMapping("/passportoffice")
@@ -40,27 +42,34 @@ public class PassportofficeController {
 	public String addPassportoffice() {
 		return "AddPassportoffice.html";
 	}
+	@GetMapping("/editPassportoffice/{id}")
+	public String editPassportoffice(@PathVariable(value="id") long id, Model m) {
+		PassportOffice office = passportOfficeRepository.findById(id).get();
+		m.addAttribute("office",office);
+		return "editPassportoffice.html";
+	}
 
+	
+	
+	
 	@PostMapping("/addPassportOffice")
 	public String add_passportoffice(@Valid @ModelAttribute("passportOffice") PassportOffice passportOffice, Model m) {
 		passportOfficeService.add_passportoffice(passportOffice);
-		List<PassportOffice> office = passportOfficeRepository.findAll();
-		m.addAttribute("office", office);
-		return "office.html";
+		return "redirect:/passportoffice";
 	}
 
-	@DeleteMapping("/passportoffice")
-	public String delete_passportoffice(@RequestBody PassportOfficeDto passportOfficeDto)
+	@GetMapping("/deletepassportoffice/{id}")
+	public String delete_passportoffice(@PathVariable(value="id") long id)
 			throws AppointmentNotFoundException {
-		String response = passportOfficeService.delete_passportoffice(passportOfficeDto.getId());
-		return response;
+		String response = passportOfficeService.delete_passportoffice(id);
+		return "redirect:/passportoffice";
 	}
 
-	@PutMapping("/passportoffice")
-	public String update_passportoffice(@Valid @RequestBody PassportOffice passportOffice)
+	@PostMapping("/editpassportoffice")
+	public String update_passportoffice(@Valid @ModelAttribute("passportOffice") PassportOffice passportOffice)
 			throws AppointmentNotFoundException {
 		String response = passportOfficeService.update_passportoffice(passportOffice);
-		return response;
+		return "redirect:/passportoffice";
 
 	}
 

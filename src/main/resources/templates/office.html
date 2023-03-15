@@ -6,7 +6,7 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap Table with Add and Delete Row Feature</title>
+<title>Table with Add and Delete Row Feature</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 <link rel="stylesheet"
@@ -28,7 +28,7 @@ body {
 }
 
 .table-wrapper {
-	width: 700px;
+	width: 900px;
 	margin: 30px auto;
 	background: #fff;
 	padding: 20px;
@@ -164,8 +164,11 @@ table.table td .add {
 							<td>[[${pp.officeName}]]</td>
 							<td>[[${pp.jurisdictionName}]]</td>
 							<td>[[${pp.phoneNumber}]]</td>
-							<td><a>address</a>
-							<td></td>
+							<td><a>Address</a>
+							<td>
+							<a th:href="@{'/editPassportoffice/'+${pp.id}}" type="button" class="btn btn-sm btn-outline-primary">Edit</a>
+							<a th:href="@{'/deletepassportoffice/'+${pp.id}}" type="button" class="btn btn-sm btn-outline-danger">Delete</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
