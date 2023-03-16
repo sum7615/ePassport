@@ -2,24 +2,17 @@ package com.passport.dto;
 
 import org.springframework.http.HttpStatus;
 
+
+
 public class ErrorMessage {
 	
-	private HttpStatus httpStatus;
+	private HttpStatus status;
 	private String message;
-	public ErrorMessage() {
-		super();
-		// TODO Auto-generated constructor stub
+	public HttpStatus getStatus() {
+		return status;
 	}
-	public ErrorMessage(HttpStatus httpStatus, String message) {
-		super();
-		this.httpStatus = httpStatus;
-		this.message = message;
-	}
-	public HttpStatus getHttpStatus() {
-		return httpStatus;
-	}
-	public void setHttpStatus(HttpStatus httpStatus) {
-		this.httpStatus = httpStatus;
+	public void setStatus(HttpStatus status) {
+		this.status = status;
 	}
 	public String getMessage() {
 		return message;

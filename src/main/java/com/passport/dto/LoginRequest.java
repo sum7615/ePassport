@@ -1,11 +1,7 @@
 package com.passport.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
 public class LoginRequest {
-
-	private long id;
     private String username;
     private String password;
     
